@@ -18,12 +18,12 @@ The x402 `exact` scheme is asset-agnostic, not Solana-specific: a server declare
 `scheme`, `network`, and `asset` per charge, and the same 402 -> authorization ->
 verify -> retry handshake serves any of them. Besides an SPL token on Solana, a seller
 can declare a fee-free native coin with no gas token for the buyer. A live merchant
-advertises `scheme: exact, network: nano:mainnet, asset: XNO` at 0.0001 XNO per call,
-so settlement removes the per-call network fee entirely:
+advertises `scheme: exact, network: nano:mainnet, asset: XNO` at 0.0001 XNO per call
+in its x402 manifest, so settlement removes the per-call network fee entirely:
 
 ```bash
-curl -s 'https://extract.paypercall.dev/api/v1/extract?url=https%3A%2F%2Fexample.com'
-# HTTP 402 with accepts[0] = { scheme: "exact", network: "nano:mainnet",
+curl -s 'https://extract.paypercall.dev/.well-known/x402'
+# resources[0].accepts[0] = { scheme: "exact", network: "nano:mainnet",
 #   asset: "XNO", amount: "100000000000000000000000000", payTo: "nano_1yo6c1t64a..." }
 ```
 
